@@ -1,0 +1,95 @@
+#summary: the purpose of this data cleaning process is to combine the datasets corresponding to the trainig set, test set and their corresponding activity labels and subjects in one 
+dataset, which will be used to extracts only some specific measurements and outputs a tidy dataset that shows, for each subject and each activity, the average of all the measurements that 
+were previously extracted. the process consisted on performing and transformations that are explained below:
+- after combinig the activity label tables of the training and test set, the activities were named by their descriptive values instead of being numerated:
+	> head(activity$activity_label, 50)
+ 	[1] "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING"
+	[11] "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING"
+	[21] "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "STANDING" "SITTING"  "SITTING"  "SITTING" 
+	[31] "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING" 
+	[41] "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"  "SITTING"
+- the combination of all the datasets, after extracting the measurements of interest looks like this: 
+	head(dataset, 2)
+  tBodyAcc_mean_X tBodyAcc_mean_Y tBodyAcc_mean_Z tBodyAcc_std_X tBodyAcc_std_Y tBodyAcc_std_Z tGravityAcc_mean_X
+1       0.2885845     -0.02029417      -0.1329051     -0.9952786     -0.9831106     -0.9135264          0.9633961
+2       0.2784188     -0.01641057      -0.1235202     -0.9982453     -0.9753002     -0.9603220          0.9665611
+  tGravityAcc_mean_Y tGravityAcc_mean_Z tGravityAcc_std_X tGravityAcc_std_Y tGravityAcc_std_Z tBodyAccJerk_mean_X
+1         -0.1408397          0.1153749        -0.9852497        -0.9817084        -0.8776250          0.07799634
+2         -0.1415513          0.1093788        -0.9974113        -0.9894474        -0.9316387          0.07400671
+  tBodyAccJerk_mean_Y tBodyAccJerk_mean_Z tBodyAccJerk_std_X tBodyAccJerk_std_Y tBodyAccJerk_std_Z tBodyGyro_mean_X
+1         0.005000803         -0.06783081         -0.9935191         -0.9883600         -0.9935750     -0.006100849
+2         0.005771104          0.02937663         -0.9955481         -0.9810636         -0.9918457     -0.016111620
+tBodyGyro_mean_Y tBodyGyro_mean_Z tBodyGyro_std_X tBodyGyro_std_Y tBodyGyro_std_Z tBodyGyroJerk_mean_X
+1      -0.03136479        0.1077254      -0.9853103      -0.9766234      -0.9922053           -0.0991674
+2      -0.08389378        0.1005843      -0.9831200      -0.9890458      -0.9891212           -0.1105028
+tBodyGyroJerk_mean_Y tBodyGyroJerk_mean_Z tBodyGyroJerk_std_X tBodyGyroJerk_std_Y tBodyGyroJerk_std_Z tBodyAccMag_mean
+1          -0.05551737          -0.06198580          -0.9921107          -0.9925193          -0.9920553       -0.9594339
+2          -0.04481873          -0.05924282          -0.9898726          -0.9972926          -0.9938510       -0.9792892
+  tBodyAccMag_std tGravityAccMag_mean tGravityAccMag_std tBodyAccJerkMag_mean tBodyAccJerkMag_std tBodyGyroMag_mean
+1      -0.9505515          -0.9594339         -0.9505515           -0.9933059          -0.9943364        -0.9689591
+2      -0.9760571          -0.9792892         -0.9760571           -0.9912535          -0.9916944        -0.9806831
+  tBodyGyroMag_std tBodyGyroJerkMag_mean tBodyGyroJerkMag_std fBodyAcc_mean_X fBodyAcc_mean_Y fBodyAcc_mean_Z
+1       -0.9643352            -0.9942478           -0.9913676      -0.9947832      -0.9829841      -0.9392687
+2       -0.9837542            -0.9951232           -0.9961016      -0.9974507      -0.9768517      -0.9735227
+  fBodyAcc_std_X fBodyAcc_std_Y fBodyAcc_std_Z fBodyAccJerk_mean_X fBodyAccJerk_mean_Y fBodyAccJerk_mean_Z
+1     -0.9954217     -0.9831330     -0.9061650          -0.9923325          -0.9871699          -0.9896961
+2     -0.9986803     -0.9749298     -0.9554381          -0.9950322          -0.9813115          -0.9897398
+  fBodyAccJerk_std_X fBodyAccJerk_std_Y fBodyAccJerk_std_Z fBodyGyro_mean_X fBodyGyro_mean_Y fBodyGyro_mean_Z
+1         -0.9958207         -0.9909363         -0.9970517       -0.9865744       -0.9817615       -0.9895148
+2         -0.9966523         -0.9820839         -0.9926268       -0.9773867       -0.9925300       -0.9896058
+  fBodyGyro_std_X fBodyGyro_std_Y fBodyGyro_std_Z fBodyAccMag_mean fBodyAccMag_std fBodyBodyAccJerkMag_mean
+1      -0.9850326      -0.9738861      -0.9940349       -0.9521547      -0.9561340               -0.9937257
+2      -0.9849043      -0.9871681      -0.9897847       -0.9808566      -0.9758658               -0.9903355
+  fBodyBodyAccJerkMag_std fBodyBodyGyroMag_mean fBodyBodyGyroMag_std fBodyBodyGyroJerkMag_mean fBodyBodyGyroJerkMag_std
+1              -0.9937550            -0.9801349           -0.9613094                -0.9919904               -0.9906975
+2              -0.9919603            -0.9882956           -0.9833219                -0.9958539               -0.9963995
+  activity_label subject
+1       STANDING       1
+2       STANDING       1
+
+- the variable names were changed in order to reflect as much as possible the measurements:
+	names(dataset)
+ [1] "tBodyAcc_mean_X"           "tBodyAcc_mean_Y"           "tBodyAcc_mean_Z"           "tBodyAcc_std_X"           
+ [5] "tBodyAcc_std_Y"            "tBodyAcc_std_Z"            "tGravityAcc_mean_X"        "tGravityAcc_mean_Y"       
+ [9] "tGravityAcc_mean_Z"        "tGravityAcc_std_X"         "tGravityAcc_std_Y"         "tGravityAcc_std_Z"        
+[13] "tBodyAccJerk_mean_X"       "tBodyAccJerk_mean_Y"       "tBodyAccJerk_mean_Z"       "tBodyAccJerk_std_X"       
+[17] "tBodyAccJerk_std_Y"        "tBodyAccJerk_std_Z"        "tBodyGyro_mean_X"          "tBodyGyro_mean_Y"         
+[21] "tBodyGyro_mean_Z"          "tBodyGyro_std_X"           "tBodyGyro_std_Y"           "tBodyGyro_std_Z"          
+[25] "tBodyGyroJerk_mean_X"      "tBodyGyroJerk_mean_Y"      "tBodyGyroJerk_mean_Z"      "tBodyGyroJerk_std_X"      
+[29] "tBodyGyroJerk_std_Y"       "tBodyGyroJerk_std_Z"       "tBodyAccMag_mean"          "tBodyAccMag_std"          
+[33] "tGravityAccMag_mean"       "tGravityAccMag_std"        "tBodyAccJerkMag_mean"      "tBodyAccJerkMag_std"      
+[37] "tBodyGyroMag_mean"         "tBodyGyroMag_std"          "tBodyGyroJerkMag_mean"     "tBodyGyroJerkMag_std"     
+[41] "fBodyAcc_mean_X"           "fBodyAcc_mean_Y"           "fBodyAcc_mean_Z"           "fBodyAcc_std_X"           
+[45] "fBodyAcc_std_Y"            "fBodyAcc_std_Z"            "fBodyAccJerk_mean_X"       "fBodyAccJerk_mean_Y"      
+[49] "fBodyAccJerk_mean_Z"       "fBodyAccJerk_std_X"        "fBodyAccJerk_std_Y"        "fBodyAccJerk_std_Z"       
+[53] "fBodyGyro_mean_X"          "fBodyGyro_mean_Y"          "fBodyGyro_mean_Z"          "fBodyGyro_std_X"          
+[57] "fBodyGyro_std_Y"           "fBodyGyro_std_Z"           "fBodyAccMag_mean"          "fBodyAccMag_std"          
+[61] "fBodyBodyAccJerkMag_mean"  "fBodyBodyAccJerkMag_std"   "fBodyBodyGyroMag_mean"     "fBodyBodyGyroMag_std"     
+[65] "fBodyBodyGyroJerkMag_mean" "fBodyBodyGyroJerkMag_std"  "activity_label"            "subject"
+
+** those variable names are extracted from "features" text document and the "README" txt document details their meanings and their units of measurements **
+- finally, this dataset was used to output the tidy data which looks like this: 
+	
+	head(seconddataset, 3)
+# A tibble: 3 x 68
+# Groups:   activity_label [1]
+  activity_label subject tBodyAcc_mean_X tBodyAcc_mean_Y tBodyAcc_mean_Z tBodyAcc_std_X tBodyAcc_std_Y tBodyAcc_std_Z
+  <chr>            <int>           <dbl>           <dbl>           <dbl>          <dbl>          <dbl>          <dbl>
+1 LAYING               1           0.222         -0.0405          -0.113         -0.928         -0.837         -0.826
+2 LAYING               2           0.281         -0.0182          -0.107         -0.974         -0.980         -0.984
+3 LAYING               3           0.276         -0.0190          -0.101         -0.983         -0.962         -0.964
+# ... with 60 more variables: tGravityAcc_mean_X <dbl>, tGravityAcc_mean_Y <dbl>, tGravityAcc_mean_Z <dbl>,
+#   tGravityAcc_std_X <dbl>, tGravityAcc_std_Y <dbl>, tGravityAcc_std_Z <dbl>, tBodyAccJerk_mean_X <dbl>,
+#   tBodyAccJerk_mean_Y <dbl>, tBodyAccJerk_mean_Z <dbl>, tBodyAccJerk_std_X <dbl>, tBodyAccJerk_std_Y <dbl>,
+#   tBodyAccJerk_std_Z <dbl>, tBodyGyro_mean_X <dbl>, tBodyGyro_mean_Y <dbl>, tBodyGyro_mean_Z <dbl>,
+#   tBodyGyro_std_X <dbl>, tBodyGyro_std_Y <dbl>, tBodyGyro_std_Z <dbl>, tBodyGyroJerk_mean_X <dbl>,
+#   tBodyGyroJerk_mean_Y <dbl>, tBodyGyroJerk_mean_Z <dbl>, tBodyGyroJerk_std_X <dbl>, tBodyGyroJerk_std_Y <dbl>,
+#   tBodyGyroJerk_std_Z <dbl>, tBodyAccMag_mean <dbl>, tBodyAccMag_std <dbl>, tGravityAccMag_mean <dbl>,
+#   tGravityAccMag_std <dbl>, tBodyAccJerkMag_mean <dbl>, tBodyAccJerkMag_std <dbl>, tBodyGyroMag_mean <dbl>,
+#   tBodyGyroMag_std <dbl>, tBodyGyroJerkMag_mean <dbl>, tBodyGyroJerkMag_std <dbl>, fBodyAcc_mean_X <dbl>,
+#   fBodyAcc_mean_Y <dbl>, fBodyAcc_mean_Z <dbl>, fBodyAcc_std_X <dbl>, fBodyAcc_std_Y <dbl>, fBodyAcc_std_Z <dbl>,
+#   fBodyAccJerk_mean_X <dbl>, fBodyAccJerk_mean_Y <dbl>, fBodyAccJerk_mean_Z <dbl>, fBodyAccJerk_std_X <dbl>,
+#   fBodyAccJerk_std_Y <dbl>, fBodyAccJerk_std_Z <dbl>, fBodyGyro_mean_X <dbl>, fBodyGyro_mean_Y <dbl>,
+#   fBodyGyro_mean_Z <dbl>, fBodyGyro_std_X <dbl>, fBodyGyro_std_Y <dbl>, fBodyGyro_std_Z <dbl>, fBodyAccMag_mean <dbl>,
+#   fBodyAccMag_std <dbl>, fBodyBodyAccJerkMag_mean <dbl>, fBodyBodyAccJerkMag_std <dbl>, fBodyBodyGyroMag_mean <dbl>,
+#   fBodyBodyGyroMag_std <dbl>, fBodyBodyGyroJerkMag_mean <dbl>, fBodyBodyGyroJerkMag_std <dbl>
